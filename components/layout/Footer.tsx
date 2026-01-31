@@ -2,7 +2,7 @@ import { FaInstagram, FaFacebook, FaYoutube, FaTwitter} from "react-icons/fa";
 export default function Footer() {
   return (
     <div className="w-full h-14 flex justify-between items-center px-3 mt-auto bg-brand-pink" >
-      <div className="flex justify-center gap-4 ">
+      <div className="flex justify-center gap-2 sm:gap-3 d:gap-4 ">
         {/* Ícone Facebook */}
         <a
           href="https://facebook.com"
@@ -40,7 +40,7 @@ export default function Footer() {
             <FaYoutube size={20} />
         </a>
       </div>
-      <p className="text-sm text-brand-cream">email@cleangril.com</p>
+      <p className="text-xs sm:text-sm text-brand-cream">email@cleangril.com</p>
     </div>
   );
 }

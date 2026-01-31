@@ -1,59 +1,109 @@
-import Link from "next/link"; // Otimizado para navegação sem recarregar a página
+import Link from "next/link";
+import { FaInstagram, FaFacebook, FaYoutube, FaTimes } from "react-icons/fa";
 
-export default function Sidebar() {
+// Definimos que a Sidebar agora aceita comandos do pai (Layout)
+interface SidebarProps {
+  isOpen: boolean; // Está aberta no celular?
+  onClose: () => void; // Função para fechar ao clicar no X ou num link
+}
+
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
-    // <aside> é a tag semântica para barras laterais
-    // h-screen: Altura 100% da viewport (tela inteira)
-    // w-64: Largura fixa (64 * 0.25rem = 16rem)
-    // fixed: Fixa na tela (opcional, mas comum em dashboards)
-    // p-6: Padding de 1.5rem em todos os lados
-    <aside className="h-screen w-64 bg-brand-cream border-r border-brand-pink/20 flex flex-col p-6">
-      {/* 1. Logo / Título */}
-      <div className="mb-10 text-center">
-        <h1 className="text-3xl font-serif text-brand-pink font-bold">CG</h1>
-        <p className="text-brand-pink text-base">Clean Girl</p>
-        <p className="text-brand-brown text-sm">Coffee</p>
-      </div>
+    <>
+      {/* OVERLAY ESCURO (Só aparece no celular quando o menu abre) */}
+      {/* Se isOpen for true, mostra o fundo preto. Se não, pointer-events-none para não atrapalhar */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose} // Fecha se clicar fora
+      />
 
-      {/* 2. Navegação */}
-      <nav className="flex-1">
-        {" "}
-        {/* flex-1 faz ocupar o espaço disponível empurrando o resto */}
-        <ul className="space-y-4">
-          {" "}
-          {/* space-y-4 adiciona margem vertical entre os filhos */}
-          {/* Item de Menu */}
-          <li>
-            <Link
-              href="/"
-              className="block p-3 rounded-lg bg-brand-pink text-white font-medium transition-colors hover:opacity-90"
-            >
-              🏠 Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/comidas"
-              className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors"
-            >
-              🥐 Comidas
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/bebidas"
-              className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors"
-            >
-              🥤 Bebidas
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      {/* A SIDEBAR EM SI */}
+      <aside
+        className={`
+          fixed md:relative z-50 h-screen w-64 bg-brand-cream border-r border-brand-pink/20 flex flex-col p-6 shadow-xl md:shadow-none transition-transform duration-300
+          ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+          top-0 left-0
+        `}
+      >
+        {/* Botão de FECHAR (Só aparece no Mobile) */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-brand-brown md:hidden hover:text-brand-pink"
+        >
+          <FaTimes size={24} />
+        </button>
 
-      {/* 3. Footer da Sidebar (Opcional - Redes sociais da imagem) */}
-      <div className="mt-auto">
-        <p className="text-xs text-brand-brown/60">© 2026 Clean Girl</p>
-      </div>
-    </aside>
+        {/* 1. Logo */}
+        <div className="mb-10 text-center mt-8 md:mt-0">
+          <h1 className="text-4xl font-serif text-brand-pink font-bold">CG</h1>
+          <p className="text-brand-pink text-base font-medium">Clean Girl</p>
+          <p className="text-brand-brown text-sm tracking-widest uppercase mt-1">
+            Coffee
+          </p>
+        </div>
+
+        {/* 2. Menu de Navegação */}
+        <nav className="flex-1">
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/"
+                onClick={onClose} // Fecha o menu ao clicar
+                className="block p-3 rounded-lg bg-brand-pink text-white font-medium shadow-md transition-all hover:opacity-90"
+              >
+                🏠 Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comidas"
+                onClick={onClose}
+                className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
+              >
+                🥐 Comidas
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/bebidas"
+                onClick={onClose}
+                className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
+              >
+                🥤 Bebidas
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* 3. Redes Sociais */}
+        <div className="mt-auto pt-6 border-t border-brand-brown/10">
+          <div className="flex justify-center gap-4 mb-2">
+            <a
+              href="#"
+              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a
+              href="#"
+              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
+            >
+              <FaFacebook size={20} />
+            </a>
+            <a
+              href="#"
+              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
+            >
+              <FaYoutube size={20} />
+            </a>
+          </div>
+          <p className="text-xs text-center text-brand-brown/40">
+            © 2026 Clean Girl
+          </p>
+        </div>
+      </aside>
+    </>
   );
 }

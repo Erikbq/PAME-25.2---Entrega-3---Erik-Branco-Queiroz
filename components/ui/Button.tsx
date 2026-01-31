@@ -19,7 +19,7 @@ export default function Button({
   // Variantes: as cores específicas de cada tipo
   const variants = {
     primary:
-      "bg-brand-pink text-white shadow-md hover:bg-brand-pink/90 hover:shadow-lg",
+      "bg-brand-green text-white shadow-md hover:bg-brand-pink/90 hover:shadow-lg",
     secondary: "bg-brand-brown text-white shadow-md hover:bg-brand-brown/90",
     outline:
       "border-2 border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white",
