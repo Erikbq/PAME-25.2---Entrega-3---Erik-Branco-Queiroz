@@ -1,3 +1,4 @@
+import DayItemCard from "../components/home/DayItemCard";
 import Hero from "../components/home/Hero";
 import NavigationCards from "../components/home/NavigationCards";
 
@@ -14,21 +15,22 @@ export default function Home() {
           <p className="text-brand-brown text-sm font-bold">Segunda à sexta: 08:00 às 20:00</p>
           <p className="text-brand-brown text-sm font-bold">Final de semana e feriados: 09:00 às 18:00</p>
       </div>
-      <div className="">
-          <NavigatinCard
+      <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <DayItemCard
           title="Item do Dia"
-          image=""
-          href=""
+          image="/cappuccino_avela.jpg"
+          description="Cappuccino Avelã"
+          href="/detalhes"
           />
-          <NavigatinCard
-          title=""
-          image=""
-          href=""
+          <NavigationCards
+          title="Cafés e bebidas"
+          image="/bebidas_clean_girl.jpg"
+          href="/bebidas"
           />
-          <NavigatinCard
-          title=""
-          image=""
-          href=""
+          <NavigationCards
+          title="Comidas"
+          image="/avocado_toast.jpg"
+          href="comidas"
           />
       </div>
     </div>

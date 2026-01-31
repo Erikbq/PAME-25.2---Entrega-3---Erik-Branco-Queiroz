@@ -33,7 +33,7 @@ export default function NavigationCard({
       </div>
 
       {/* 2. A BARRA INFERIOR (Texto e Seta) */}
-      <div className="absolute bottom-0 w-full bg-brand-pink/90 backdrop-blur-sm p-4 flex justify-between items-center transition-colors group-hover:bg-brand-pink">
+      <div className="absolute bottom-0 w-full bg-brand-green/90 backdrop-blur-sm p-4 flex justify-between items-center transition-colors group-hover:bg-brand-pink">
         <span className="text-white font-serif font-bold text-lg tracking-wide">
           {title}
         </span>
