@@ -1,8 +1,7 @@
 export default function Hero() {
   return (
-    
     <section className="relative w-full grid grid-cols-1 rounded-2xl overflow-hidden shadow-lg bg-white h-72">
-      <div className="block lg:hiddem h-full w-full bg-brand-cream">
+      <div className="block lg:hidden h-full w-full bg-brand-cream">
         <img
           src="/fachada_esticada.png"
           alt="Fachada Clean Girl"
@@ -10,14 +9,20 @@ export default function Hero() {
         />
       </div>
 
-      <div className="hiddem lg:block h-full w-full bg-brand-cream">
+      <div className="hidden lg:block h-full w-full bg-brand-cream overflow-hidden">
         <img
           src="/fachada_esticada.png"
           alt="Fachada Clean Girl"
-          className="w-full h-full object-contain object-bottom"
+          className="w-full h-full object-cover"
+          style={{
+            // Aumenta a imagem para 170% do tamanho normal
+            transform: "scale(1.0)",
+            // Fixa o foco no chão (pra não cortar as cadeiras) e no centro
+            transformOrigin: "bottom center",
+            // Ajuste fino: se precisar subir um pouquinho o foco, troque 'bottom' por '80% 100%'
+          }}
         />
       </div>
-
 
       {/* 1. O OVERLAY (Cobre as duas fotos) */}
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
