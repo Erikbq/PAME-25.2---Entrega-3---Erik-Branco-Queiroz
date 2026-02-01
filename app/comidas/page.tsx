@@ -1,69 +1,12 @@
 import ProductCard from "@/components/menu/ProductCard";
+import { products } from "@/data/products"; 
 
 export default function Comidas() {
-  // Lista de dados
-  const pratos = [
-    {
-      id: 1,
-      title: "Croissant de Amêndoas",
-      description:
-        "Massa folhada francesa legítima, recheada com creme frangipane e lâminas de amêndoas tostadas.",
-      price: "22,00",
-      image:
-        "/almond_croassant.jpg",
-    },
-    {
-      id: 2,
-      title: "Avocado Toast",
-      description:
-        "Pão de fermentação natural tostado, pasta de avocado temperada, ovo poché e gergelim negro.",
-      price: "28,90",
-      image:
-        "/avocado_toast_ovo.jpg",
-    },
-    {
-      id: 3,
-      title: "Bowl de Frutas da Estação",
-      description:
-        "Mix refrescante de frutas selecionadas, iogurte grego natural, granola artesanal e mel orgânico.",
-      price: "19,50",
-      image:
-        "/fruit_bowl.jpg",
-    },
-    {
-      id: 4,
-      title: "Cinnamon Roll",
-      description:
-        "Enroladinho de canela macio com cobertura de cream cheese frosting. Servido quentinho.",
-      price: "16,00",
-      image:
-        "/cinnamon_roll.jpg",
-    },
-    {
-      id: 5,
-      title: "Quiche de Lorraine",
-      description:
-        "Massa podre que derrete na boca, recheio cremoso de queijo gruyère e bacon crocante.",
-      price: "24,00",
-      image:
-        "/quiche_lorraine.jpg",
-    },
-    {
-      id: 6,
-      title: "Cheesecake de Frutas Vermelhas",
-      description:
-        "Base de biscoito amanteigado, creme de queijo denso e calda rústica de morango e mirtilo.",
-      price: "21,90",
-      image:
-        "/cheesecake.jpg",
-    
-    },
-  ];
+  // Aramazena somente os itens com a categoria comida
+  const listaComidas = products.filter((item) => item.category === "comida");
 
   return (
-    // Container principal centralizado
     <div className="w-full max-w-6xl mx-auto px-6 py-10 flex flex-col gap-10">
-      {/* Cabeçalho da página */}
       <div className="text-center space-y-2">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-brand-brown">
           Nossas Comidas
@@ -74,16 +17,16 @@ export default function Comidas() {
         </p>
       </div>
 
-      {/* Grid de produtos */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8">
-        {/* Uso de .map para criar os cards automaticamente baseados na lista acima */}
-        {pratos.map((item) => (
+        {/* Renderizando a lista filtrada */}
+        {listaComidas.map((item) => (
           <ProductCard
             key={item.id}
-            title={item.title}
-            description={item.description}
+            title={item.name}
+            description={item.shortDescription}
             price={item.price}
             image={item.image}
+            slug={item.slug}
           />
         ))}
       </div>
