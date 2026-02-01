@@ -13,11 +13,9 @@ interface ProductPageProps {
 
 // 'async' antes de function serve para poder usar 'await'
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
-  
+
   // Esperamos o Next.js resolver os parâmetros para pegar o slug real
   const { slug } = await params;
-
-  console.log("Slug recebido (Agora vai funcionar):", slug);
 
   // Agora buscamos o produto usando o slug já resolvido
   const product = getProductBySlug(slug);

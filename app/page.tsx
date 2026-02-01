@@ -18,9 +18,9 @@ export default function Home() {
       <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <DayItemCard
           title="Item do Dia"
-          image="/cappuccino_avela.jpg"
-          description="Cappuccino Avelã"
-          href="/detalhes"
+          image="/caramel_macchiato.jpg"
+          description="Caramel Macchiato"
+          href="/produto/caramel-macchiato"
           />
           <NavigationCards
           title="Cafés e bebidas"

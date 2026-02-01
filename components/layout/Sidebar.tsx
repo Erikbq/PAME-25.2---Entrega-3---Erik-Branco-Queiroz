@@ -74,6 +74,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 🥤 Bebidas
               </Link>
             </li>
+            <li>
+              <Link
+                href="/favoritos"
+                onClick={onClose}
+                className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
+              >
+                ❤️ Favoritos
+              </Link>
+            </li>
           </ul>
         </nav>
 

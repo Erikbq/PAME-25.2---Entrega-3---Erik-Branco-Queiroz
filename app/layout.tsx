@@ -6,6 +6,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa"; 
+import { FavoritesProvider } from "@/context/FavoritesContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,34 +23,36 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex bg-brand-cream h-screen overflow-hidden`}
       >
-        {/* Lado esquerdo: Sidebar */}
-        <Sidebar
-          isOpen={isMobileMenuOpen}
-          onClose={() => setIsMobileMenuOpen(false)}
-        />
+        <FavoritesProvider>
+          {/* Lado esquerdo: Sidebar */}
+          <Sidebar
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+          />
 
-        {/* Lado direito: Conteúdo principal */}
-        <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-          {/* Botão mobile*/}
-          {/* Só aparece em telas pequenas (md:hidden) e fica flutuando no topo */}
-          <div className="md:hidden p-4 absolute top-0 left-0 z-30">
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="bg-white/80 backdrop-blur-md p-2 rounded-lg shadow-md text-brand-brown hover:text-brand-pink transition-colors"
-            >
-              <FaBars size={24} />
-            </button>
+          {/* Lado direito: Conteúdo principal */}
+          <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
+            {/* Botão mobile*/}
+            {/* Só aparece em telas pequenas (md:hidden) e fica flutuando no topo */}
+            <div className="md:hidden p-4 absolute top-0 left-0 z-30">
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="bg-white/80 backdrop-blur-md p-2 rounded-lg shadow-md text-brand-brown hover:text-brand-pink transition-colors"
+              >
+                <FaBars size={24} />
+              </button>
+            </div>
+
+            {/* Área de Scroll */}
+            <main className="flex-1 overflow-y-auto p-4 md:p-8 pt-16 md:pt-8">
+              {children}
+            </main>
+
+            {/* Rodapé */}
+            <Footer />
           </div>
-
-          {/* Área de Scroll */}
-          <main className="flex-1 overflow-y-auto p-4 md:p-8 pt-16 md:pt-8">
-            {children}
-          </main>
-
-          {/* Rodapé */}
-          <Footer />
-        </div>
-      </body>    
+        </FavoritesProvider>
+      </body>
     </html>
   );
 }
