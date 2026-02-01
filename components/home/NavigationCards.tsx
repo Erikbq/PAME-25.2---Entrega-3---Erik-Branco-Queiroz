@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 interface CategoryCardProps {
   title: string;
   image: string;
-  href: string; // O link para onde o card leva (ex: /comidas)
+  href: string;
 }
 
 export default function NavigationCard({
@@ -25,14 +25,14 @@ export default function NavigationCard({
           src={image}
           alt={title}
           fill
-          // group-hover:scale-110 -> Dá um zoom suave na foto quando passa o mouse
+          // group-hover:scale-110 dá um zoom suave na foto quando passa o mouse
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Camada escura leve para garantir contraste se a foto for clara demais */}
+        {/* Overlay para garantir contraste */}
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
       </div>
 
-      {/* 2. A BARRA INFERIOR (Texto e Seta) */}
+      {/* A barra inferior (Texto e Seta) */}
       <div className="absolute bottom-0 w-full bg-brand-green/90 backdrop-blur-sm p-4 flex justify-between items-center transition-colors group-hover:bg-brand-pink">
         <span className="text-white font-serif font-bold text-lg tracking-wide">
           {title}

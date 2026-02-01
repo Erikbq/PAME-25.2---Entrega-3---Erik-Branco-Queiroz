@@ -1,7 +1,7 @@
 import ProductCard from "@/components/menu/ProductCard";
 
 export default function Bebidas() {
-  // 1. LISTA DE DADOS (Simulando seu banco de dados)
+  // Lista de dados
   const bebidas = [
     {
       id: 1,
@@ -54,9 +54,9 @@ export default function Bebidas() {
   ];
 
   return (
-    // Container Principal centralizado
+    // Container principal centralizado
     <div className="w-full max-w-6xl mx-auto px-6 py-10 flex flex-col gap-10">
-      {/* CABEÇALHO DA PÁGINA */}
+      {/* Cabeçalho da página */}
       <div className="text-center space-y-2">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-brand-brown">
           Nossas Bebidas
@@ -67,7 +67,7 @@ export default function Bebidas() {
         </p>
       </div>
 
-      {/* GRID DE PRODUTOS */}
+      {/* Grid de produtos */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8">
         {bebidas.map((item) => (
           <ProductCard

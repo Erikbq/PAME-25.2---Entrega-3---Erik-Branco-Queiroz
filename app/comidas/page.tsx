@@ -1,8 +1,7 @@
 import ProductCard from "@/components/menu/ProductCard";
 
 export default function Comidas() {
-  // 1. LISTA DE DADOS (Simulando seu banco de dados)
-  // Assim fica fácil adicionar ou remover pratos sem mexer no HTML
+  // Lista de dados
   const pratos = [
     {
       id: 1,
@@ -11,7 +10,7 @@ export default function Comidas() {
         "Massa folhada francesa legítima, recheada com creme frangipane e lâminas de amêndoas tostadas.",
       price: "22,00",
       image:
-        "/almond_croassant.jpg", // Imagem temporária
+        "/almond_croassant.jpg",
     },
     {
       id: 2,
@@ -62,9 +61,9 @@ export default function Comidas() {
   ];
 
   return (
-    // Container Principal centralizado
+    // Container principal centralizado
     <div className="w-full max-w-6xl mx-auto px-6 py-10 flex flex-col gap-10">
-      {/* CABEÇALHO DA PÁGINA */}
+      {/* Cabeçalho da página */}
       <div className="text-center space-y-2">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-brand-brown">
           Nossas Comidas
@@ -75,13 +74,12 @@ export default function Comidas() {
         </p>
       </div>
 
-      {/* GRID DE PRODUTOS */}
-      {/* gap-8 dá mais respiro entre os cards do que gap-4 */}
+      {/* Grid de produtos */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8">
-        {/* Aqui usamos o .map para criar os cards automaticamente baseados na lista acima */}
+        {/* Uso de .map para criar os cards automaticamente baseados na lista acima */}
         {pratos.map((item) => (
           <ProductCard
-            key={item.id} // O React precisa dessa chave única
+            key={item.id}
             title={item.title}
             description={item.description}
             price={item.price}

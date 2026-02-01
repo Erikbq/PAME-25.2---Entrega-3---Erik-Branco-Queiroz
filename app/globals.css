@@ -1,22 +1,19 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
 @theme {
-  /* Definindo nossas cores "Clean Girl" direto no CSS */
+  /* Definindo as cores da marca direto no CSS */
   --color-brand-cream: #FFF8DC;
   --color-brand-pink: #D48C92;
   --color-brand-green: #7F9C88;
   --color-brand-brown: #4A3B32;
   --color-brand-light: #FDF6F6;
   
-  /* Definindo a fonte serifada */
+  /* Definindo a fonte */
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /*
   Agora aplicamos as regras.
-  O Tailwind v4 detecta automaticamente as variáveis acima
-  e cria as classes: bg-brand-cream, text-brand-brown, etc.
 */
 body {
   @apply bg-brand-cream text-brand-brown antialiased;

@@ -1,11 +1,11 @@
-"use client"; // Importante: Agora usamos useState, então precisamos disso
+"use client"; // Uso de useState
 
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa"; // Ícone do Hambúrguer
+import { FaBars } from "react-icons/fa"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,15 +22,15 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex bg-brand-cream h-screen overflow-hidden`}
       >
-        {/* LADO ESQUERDO: Sidebar (Agora com inteligência) */}
+        {/* Lado esquerdo: Sidebar */}
         <Sidebar
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
         />
 
-        {/* LADO DIREITO: Conteúdo Principal */}
+        {/* Lado direito: Conteúdo principal */}
         <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-          {/* BOTÃO MOBILE (Hambúrguer) */}
+          {/* Botão mobile*/}
           {/* Só aparece em telas pequenas (md:hidden) e fica flutuando no topo */}
           <div className="md:hidden p-4 absolute top-0 left-0 z-30">
             <button
@@ -49,7 +49,7 @@ export default function RootLayout({
           {/* Rodapé */}
           <Footer />
         </div>
-      </body>
+      </body>    
     </html>
   );
 }

@@ -3,8 +3,8 @@ import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 
 interface CategoryDayCardProps {
-  title: string; // Ex: "Item do Dia"
-  description: string; // Ex: "Cappuccino Avelã"
+  title: string; 
+  description: string;
   image: string;
   href: string;
 }
@@ -16,23 +16,23 @@ export default function DayItemCard({
   href,
 }: CategoryDayCardProps) {
   return (
-    // CONTAINER PRINCIPAL (Flex Row = Lado a Lado)
+    // Container principal
     <div className="group relative flex h-64 w-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-brown/40">
-      {/* 1. LADO ESQUERDO: IMAGEM (Ocupa 45% da largura) */}
+      {/* Lado esquerdo: a imagem ocupa 45% da largura */}
       <div className="relative w-[45%] h-full overflow-hidden">
         <Image
           src={image}
           alt={title}
-          fill // Preenche o pai (div w-[45%])
+          fill // Preenche o pai
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Overlay sutil para dar acabamento na foto */}
+        {/* Overlay para dar acabamento na foto */}
         <div className="absolute inset-0 bg-brand-brown/5 mix-blend-multiply" />
       </div>
 
-      {/* 2. LADO DIREITO: CONTEÚDO (Ocupa o resto) */}
+      {/* Lado direito : conteúdo (Ocupa o resto) */}
       <div className="flex-1 flex flex-col justify-center p-6 bg-brand-light">
-        {/* Título Pequeno (Label) */}
+        {/* Título Pequeno */}
         <span className="text-xs font-bold text-brand-green uppercase tracking-widest mb-2">
           {title}
         </span>

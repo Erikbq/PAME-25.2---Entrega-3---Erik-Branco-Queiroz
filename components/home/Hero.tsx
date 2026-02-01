@@ -15,19 +15,18 @@ export default function Hero() {
           alt="Fachada Clean Girl"
           className="w-full h-full object-cover"
           style={{
-            // Aumenta a imagem para 170% do tamanho normal
-            transform: "scale(1.0)",
-            // Fixa o foco no chão (pra não cortar as cadeiras) e no centro
+            // Aumenta a imagem
+            //transform: "scale(1.0)",
+            // Fixa o foco no chão
             transformOrigin: "bottom center",
-            // Ajuste fino: se precisar subir um pouquinho o foco, troque 'bottom' por '80% 100%'
           }}
         />
       </div>
 
-      {/* 1. O OVERLAY (Cobre as duas fotos) */}
+      {/* Aplicação de overlay */}
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
 
-      {/* 2. O TEXTO (Centralizado no meio de tudo) */}
+      {/* O texto centralizado no meio de tudo */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
         <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-cream drop-shadow-md mb-2">
           Clean Girl

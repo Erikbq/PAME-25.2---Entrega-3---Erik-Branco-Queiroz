@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "../ui/Button"; // Importamos nosso botão
-import { FaCartPlus } from "react-icons/fa"; // Ícone do carrinho
+import Button from "../ui/Button"; 
+import { FaCartPlus } from "react-icons/fa"; 
 
 interface ProductProps {
   title: string;
@@ -16,9 +16,9 @@ export default function ProductCard({
   image,
 }: ProductProps) {
   return (
-    // A Caixa Externa: Fundo branco, borda arredondada e sombra suave
+    // A Caixa externa: Fundo branco, borda arredondada e sombra suave
     <div className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-brown/5 flex flex-col h-full">
-      {/* 1. Área da Imagem (com zoom suave ao passar o mouse) */}
+      {/* Área da Imagem com zoom suave ao passar o mouse */}
       <div className="relative h-48 w-full overflow-hidden rounded-xl mb-4">
         <Image
           src={image}
@@ -32,7 +32,7 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* 2. Informações */}
+      {/* Informações */}
       <div className="flex-1 flex flex-col">
         <h3 className="text-xl font-serif font-bold text-brand-brown mb-1">
           {title}
@@ -41,7 +41,7 @@ export default function ProductCard({
           {description}
         </p>
 
-        {/* 3. Ação (Botão fica no final) */}
+        {/* Ação (Botão fica no final) */}
         <div className="mt-auto">
           <Button variant="primary" className="w-full">
             <FaCartPlus /> Adicionar

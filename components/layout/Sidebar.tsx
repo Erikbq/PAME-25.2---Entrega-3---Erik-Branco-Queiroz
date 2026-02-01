@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaInstagram, FaFacebook, FaYoutube, FaTimes } from "react-icons/fa";
 
-// Definimos que a Sidebar agora aceita comandos do pai (Layout)
+// A Sidebar aceita comandos do pai (Layout)
 interface SidebarProps {
   isOpen: boolean; // Está aberta no celular?
   onClose: () => void; // Função para fechar ao clicar no X ou num link
@@ -10,8 +10,8 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
-      {/* OVERLAY ESCURO (Só aparece no celular quando o menu abre) */}
-      {/* Se isOpen for true, mostra o fundo preto. Se não, pointer-events-none para não atrapalhar */}
+      {/* Overlay escuro (Só aparece no celular quando o menu abre) */}
+      {/* Se isOpen for true, mostra o fundo preto. Caso contrário, pointer-events-none para não atrapalhar */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
