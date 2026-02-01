@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { FaInstagram, FaFacebook, FaYoutube, FaTimes } from "react-icons/fa";
+import { VscCoffee } from "react-icons/vsc";
+import { LuCroissant } from "react-icons/lu";
+import { IoHomeOutline } from "react-icons/io5";
+import { RiDrinksLine } from "react-icons/ri";
+import { FaRegHeart } from "react-icons/fa6";
 
 // A Sidebar aceita comandos do pai (Layout)
 interface SidebarProps {
@@ -37,7 +42,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* 1. Logo */}
         <div className="mb-10 text-center mt-8 md:mt-0">
-          <h1 className="text-4xl font-serif text-brand-pink font-bold">CG</h1>
+          <div className="flex gap-0.5 justify-center items-center text-4xl text-brand-brown">
+            <h1 className=" font-serif text-brand-pink font-bold">CG</h1>
+            <VscCoffee />
+          </div>
           <p className="text-brand-pink text-base font-medium">Clean Girl</p>
           <p className="text-brand-brown text-sm tracking-widest uppercase mt-1">
             Coffee
@@ -53,7 +61,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose} // Fecha o menu ao clicar
                 className="block p-3 rounded-lg bg-brand-pink text-white font-medium shadow-md transition-all hover:opacity-90"
               >
-                🏠 Home
+                <div className="flex items-center gap-2">
+                  <IoHomeOutline className="text-brand-green" />
+                  <p>Home</p>
+                </div>
               </Link>
             </li>
             <li>
@@ -62,7 +73,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose}
                 className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
               >
-                🥐 Comidas
+                <div className="flex items-center gap-2">
+                  <LuCroissant className="text-brand-green" />
+                  <p>Comidas</p>
+                </div>
               </Link>
             </li>
             <li>
@@ -71,7 +85,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose}
                 className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
               >
-                🥤 Bebidas
+                <div className="flex items-center gap-2">
+                  <RiDrinksLine className="text-brand-green" />
+                  <p>Bebidas</p>
+                </div>
               </Link>
             </li>
             <li>
@@ -80,34 +97,16 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose}
                 className="block p-3 rounded-lg text-brand-brown hover:bg-brand-pink/10 transition-colors font-medium"
               >
-                ❤️ Favoritos
+                <div className="flex items-center gap-2">
+                  <FaRegHeart className="text-brand-green" />
+                  <p>Favoritos</p>
+                </div>
               </Link>
             </li>
           </ul>
         </nav>
 
-        {/* 3. Redes Sociais */}
-        <div className="mt-auto pt-6 border-t border-brand-brown/10">
-          <div className="flex justify-center gap-4 mb-2">
-            <a
-              href="#"
-              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
-            >
-              <FaInstagram size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
-            >
-              <FaFacebook size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-brand-brown/60 hover:text-brand-pink transition-colors"
-            >
-              <FaYoutube size={20} />
-            </a>
-          </div>
+        <div className="mt-auto pt-4.5 border-t border-brand-brown/10">
           <p className="text-xs text-center text-brand-brown/40">
             © 2026 Clean Girl
           </p>

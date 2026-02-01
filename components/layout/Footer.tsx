@@ -1,4 +1,4 @@
-import { FaInstagram, FaFacebook, FaYoutube, FaTwitter} from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaYoutube} from "react-icons/fa";
 export default function Footer() {
   return (
     <div className="w-full h-14 flex justify-between items-center px-3 mt-auto bg-brand-pink" >
@@ -11,15 +11,6 @@ export default function Footer() {
         >
             <FaFacebook size={20} />
         </a>      
-
-        {/* Ícone Twitter*/}
-        <a
-          href="https://X.com"
-          target="_blank" // Abre em nova aba
-          className="text-brand-cream hover:text-brand-brown transition-colors"
-          >
-            <FaTwitter size={20} />
-        </a>
 
         {/* Ícone Instagram */}
         <a
