@@ -1,7 +1,9 @@
-"use client";
+"use client"; // client por ter interação do usuário
 
+// Importações de ícone
 import { FaSortAmountDown, FaSortAmountUp, FaFilter } from "react-icons/fa";
 
+// Define os parâmetros e tipos do objeto
 interface FilterBarProps {
   sortOrder: "asc" | "desc" | "default";
   onSortChange: (order: "asc" | "desc" | "default") => void;
@@ -10,6 +12,7 @@ interface FilterBarProps {
   availableTags: string[]; // Ex: ["Vegano", "Sem Glúten"]
 }
 
+// Define oque passar e para quem
 export default function FilterBar({
   sortOrder,
   onSortChange,
@@ -19,10 +22,10 @@ export default function FilterBar({
 }: FilterBarProps) {
   return (
     <div className="flex flex-wrap items-center gap-3 mb-8">
-      {/* 1. BOTÃO DE ORDENAÇÃO DE PREÇO */}
+      {/* Botão de ordenação de preço */}
       <button
         onClick={() => {
-          // Ciclo: Default -> Menor Preço -> Maior Preço -> Default
+          // Definição do ciclo: Default -> Menor Preço -> Maior Preço -> Default
           if (sortOrder === "default") onSortChange("asc");
           else if (sortOrder === "asc") onSortChange("desc");
           else onSortChange("default");
@@ -33,10 +36,12 @@ export default function FilterBar({
             : "bg-white text-brand-brown border-brand-brown/10 hover:border-brand-brown/30"
         }`}
       >
+        {/* Ícones da ordenação */}
         {sortOrder === "asc" && <FaSortAmountDown />}
         {sortOrder === "desc" && <FaSortAmountUp />}
         {sortOrder === "default" && <FaFilter />}
 
+        {/* Texto da ordenação */}
         {sortOrder === "asc"
           ? "Menor Preço"
           : sortOrder === "desc"
@@ -44,10 +49,10 @@ export default function FilterBar({
             : "Ordenar"}
       </button>
 
-      {/* DIVISÓRIA VISUAL (Opcional) */}
+      {/* Divisória visual */}
       <div className="w-px h-8 bg-brand-brown/10 mx-1 hidden sm:block"></div>
 
-      {/* 2. FILTROS RÁPIDOS (TAGS) */}
+      {/* Filtros rápidos (TAGS) */}
       <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 no-scrollbar flex-1">
         {availableTags.map((tag) => (
           <button
