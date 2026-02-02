@@ -1,0 +1,81 @@
+================================================================================
+                        FLUXO DE INFORMAÇÃO - CLEAN GIRL COFFEE
+================================================================================
+
+1. A FONTE DA VERDADE (BANCO DE DADOS)
+   Arquivo: data/products.ts
+   -----------------------------------------------------------------------------
+   - O que faz: Armazena todos os produtos (comidas e bebidas) em uma lista estática.
+   - Estrutura: Cada item tem id, slug, nome, preço, categoria, imagem, etc.
+   - Funções Exportadas:
+     a) products (a lista completa).
+     b) getProductBySlug(slug) (função para buscar um item específico).
+
+2. GERENCIAMENTO DE ESTADO (MEMÓRIA GLOBAL)
+   Arquivo: context/FavoritesContext.tsx
+   -----------------------------------------------------------------------------
+   - O que faz: Cria uma "nuvem" de dados acessível por todo o site.
+   - Dados: Armazena apenas os 'slugs' dos itens favoritados (ex: ["cappuccino", "bolo"]).
+   - Funções: toggleFavorite (adiciona/remove), isFavorite (verifica se já curtiu).
+   - Conexão: Envolve todo o app através do arquivo 'app/layout.tsx'.
+
+================================================================================
+                            FLUXOS DE NAVEGAÇÃO
+================================================================================
+
+3. FLUXO DA PÁGINA INICIAL (HOME)
+   Arquivo: app/page.tsx
+   -----------------------------------------------------------------------------
+   [Layout.tsx] -> Renderiza Sidebar (Menu Lateral) e Footer.
+        |
+        v
+   [Page.tsx]
+        +-> Hero.tsx (Banner principal).
+        +-> NavigationCards.tsx (Links para /comidas e /bebidas).
+        +-> DescriptionAccordion.tsx (Texto "Sobre" expansível).
+        +-> DayItemCard.tsx (Destaque do dia).
+
+4. FLUXO DE CATEGORIAS (COMIDAS & BEBIDAS)
+   Arquivos: app/comidas/page.tsx  e  app/bebidas/page.tsx
+   -----------------------------------------------------------------------------
+   Passo 1: A página importa a lista 'products' de 'data/products.ts'.
+   Passo 2: A página aplica um FILTRO:
+            - Comidas: products.filter(p => p.category === 'comida')
+            - Bebidas: products.filter(p => p.category === 'bebida')
+   Passo 3: Mapeia (.map) os itens filtrados para criar vários componentes <ProductCard />.
+   Passo 4: Cada <ProductCard /> recebe os dados e cria um Link para /produto/[slug].
+
+5. FLUXO DE DETALHES DO PRODUTO (ROTA DINÂMICA)
+   Arquivo: app/produto/[slug]/page.tsx
+   -----------------------------------------------------------------------------
+   Passo 1: O usuário clica num card. A URL muda (ex: /produto/cappuccino).
+   Passo 2: A página lê o parâmetro 'slug' da URL (via params).
+   Passo 3: Chama getProductBySlug(slug) para pegar os dados completos daquele item.
+   Passo 4: Renderiza a foto grande, descrição longa e tabela nutricional.
+   Passo 5: Importa <FavoriteButton /> (Client Component) para permitir favoritar
+            sem quebrar a renderização do servidor.
+
+6. FLUXO DE FAVORITOS
+   Arquivo: app/favoritos/page.tsx
+   -----------------------------------------------------------------------------
+   Passo 1: Acessa o Contexto (FavoritesContext) para ver quais slugs o usuário curtiu.
+   Passo 2: Importa a lista completa 'products'.
+   Passo 3: Filtra a lista completa, mantendo apenas os itens que estão no Contexto.
+   Passo 4: Exibe os itens filtrados usando <ProductCard />.
+
+================================================================================
+                            COMPONENTES CHAVE
+================================================================================
+
+A. Sidebar.tsx (Layout)
+   - Controla a navegação mobile.
+   - Usa estado local (useState) para abrir/fechar gaveta.
+
+B. ProductCard.tsx (UI)
+   - Recebe dados do produto.
+   - É clicável (leva para detalhes).
+   - Possui botão de estrela que fala direto com o FavoritesContext.
+
+C. FavoriteButton.tsx (UI)
+   - Componente isolado ("Ilha de interatividade").
+   - Usado na página de detalhes para permitir interação em uma página estática.

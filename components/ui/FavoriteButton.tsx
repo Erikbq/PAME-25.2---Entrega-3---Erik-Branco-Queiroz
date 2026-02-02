@@ -1,13 +1,17 @@
-"use client"; // <--- A MÁGICA: Este componente roda no navegador
+"use client"; // Este componente roda no navegador. Por isso o client
 
+// Importa o canal de comunicação e ícones
 import { useFavorites } from "@/context/FavoritesContext";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
+// Define o parâmetro e tipo do objeto
 interface FavoriteButtonProps {
   slug: string;
 }
 
+// Define oque pasar e para oque
 export default function FavoriteButton({ slug }: FavoriteButtonProps) {
+  {/* Variável de controle e acesso da memória global*/}
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorite = isFavorite(slug);
 

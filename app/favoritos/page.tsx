@@ -1,5 +1,6 @@
 "use client"; // Necessário para ler o contexto
 
+// import do Card de produtos, banco de dados e canal de comunicação dos favoritos
 import ProductCard from "@/components/menu/ProductCard";
 import { products } from "@/data/products";
 import { useFavorites } from "@/context/FavoritesContext";
@@ -29,6 +30,7 @@ export default function Favoritos() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8">
+        {/* Faz um map para criar os cards a partir da lista de favoritos */}
         {listaFavoritos.map((item) => (
           <ProductCard
             key={item.id}

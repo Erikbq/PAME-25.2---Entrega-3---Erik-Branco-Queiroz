@@ -1,20 +1,22 @@
-"use client";
+"use client"; // Este componente roda no navegador por possuir interação
 
+// Importes para comunicação e extração de estado
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// Definimos o que vamos compartilhar
+// Define o que será compartilhado
 interface FavoritesContextType {
   favorites: string[]; // Lista de slugs (ex: ["cappuccino", "croissant"])
   toggleFavorite: (slug: string) => void; // Função para adicionar/remover
   isFavorite: (slug: string) => boolean; // Função para checar se é favorito
 }
 
+// Cria o canal de comunicação com valor inicial de undefined
 const FavoritesContext = createContext<FavoritesContextType | undefined>(
   undefined,
 );
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  // AQUI ESTÁ A LISTA SIMPLIFICADA
+  // Cria a lista
   // Começa vazia e só vive enquanto a página não for recarregada
   const [favorites, setFavorites] = useState<string[]>([]);
 

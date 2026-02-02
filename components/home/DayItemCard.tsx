@@ -1,7 +1,9 @@
+// Importa os links e imagens próprios do next e um ícone de seta
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 
+// Define os variáveis, e os seus tipos, de um objeto
 interface CategoryDayCardProps {
   title: string; 
   description: string;
@@ -9,6 +11,7 @@ interface CategoryDayCardProps {
   href: string;
 }
 
+// Define oque tem de ser passado para a função e para quem
 export default function DayItemCard({
   title,
   image,
@@ -43,7 +46,7 @@ export default function DayItemCard({
         </h3>
 
         {/* Botão "Ver Mais" */}
-        {/* mt-auto empurra o botão para baixo se sobrar espaço, mas aqui usamos gap */}
+        {/* mt-auto empurra o botão para baixo se sobrar espaço */}
         <div className="mt-auto">
           <Link href={href}>
             <button className="flex items-center gap-2 text-sm font-medium text-brand-brown hover:text-brand-pink transition-colors group-hover:translate-x-1 duration-300">

@@ -1,5 +1,6 @@
+// Importa o link nest e ícones
 import Link from "next/link";
-import { FaInstagram, FaFacebook, FaYoutube, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { VscCoffee } from "react-icons/vsc";
 import { LuCroissant } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
@@ -24,7 +25,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         onClick={onClose} // Fecha se clicar fora
       />
 
-      {/* A SIDEBAR EM SI */}
+      {/* Sidebar */}
       <aside
         className={`
           fixed md:relative z-50 h-screen w-64 bg-brand-cream border-r border-brand-pink/20 flex flex-col p-6 shadow-xl md:shadow-none transition-transform duration-300
@@ -32,7 +33,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           top-0 left-0
         `}
       >
-        {/* Botão de FECHAR (Só aparece no Mobile) */}
+        {/* Botão de fechar (Só aparece no Mobile) */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-brand-brown md:hidden hover:text-brand-pink"
@@ -40,7 +41,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <FaTimes size={24} />
         </button>
 
-        {/* 1. Logo */}
+        {/* Logo */}
         <div className="mb-10 text-center mt-8 md:mt-0">
           <div className="flex gap-0.5 justify-center items-center text-4xl text-brand-brown">
             <h1 className=" font-serif text-brand-pink font-bold">CG</h1>
@@ -52,7 +53,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </p>
         </div>
 
-        {/* 2. Menu de Navegação */}
+        {/* Menu de Navegação */}
         <nav className="flex-1">
           <ul className="space-y-2">
             <li>

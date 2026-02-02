@@ -1,3 +1,4 @@
+// Importa o componente de Card de produto e o banco de dados
 import ProductCard from "@/components/menu/ProductCard";
 import { products } from "@/data/products";
 
@@ -6,6 +7,7 @@ export default function Comidas() {
   const listaComidas = products.filter((item) => item.category === "bebida");
 
   return (
+    // Conteiner principal
     <div className="w-full max-w-6xl mx-auto px-6 py-10 flex flex-col gap-10">
       <div className="text-center space-y-2">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-brand-brown">

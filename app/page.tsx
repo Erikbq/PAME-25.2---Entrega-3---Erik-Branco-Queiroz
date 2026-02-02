@@ -1,3 +1,4 @@
+// Import dos componentes
 import DayItemCard from "../components/home/DayItemCard";
 import Hero from "../components/home/Hero";
 import NavigationCards from "../components/home/NavigationCards";

@@ -1,11 +1,13 @@
 "use client"; // Obrigatório para interatividade
 
+// Importações de imagem e link next, botão especial, canal de comunicação e ícones
 import Image from "next/image";
 import Button from "../ui/Button";
 import { FaCartPlus, FaRegStar, FaStar } from "react-icons/fa"; // Importe a estrela cheia (FaStar)
 import Link from "next/link";
 import { useFavorites } from "@/context/FavoritesContext"; // Importe nosso hook
 
+// Define os parâmetros e tipos do objeto
 interface ProductProps {
   title: string;
   description: string;
@@ -14,6 +16,7 @@ interface ProductProps {
   slug: string;
 }
 
+// Define oque passar e para quem 
 export default function ProductCard({
   title,
   description,
@@ -23,9 +26,10 @@ export default function ProductCard({
 }: ProductProps) {
   // Acessa a memória global
   const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(slug); // true ou false
+  const favorite = isFavorite(slug); 
 
   return (
+    // Passa como link o caminho completado pela string em slug
     <Link href={`/produto/${slug}`}>
       <div className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-brown/5 flex flex-col h-full">
         <div className="relative h-48 w-full overflow-hidden rounded-xl mb-4">
@@ -40,12 +44,12 @@ export default function ProductCard({
             R$ {price}
           </div>
 
-          {/* O BOTÃO MÁGICO */}
+          {/* Botão */}
           <button
             onClick={(e) => {
-              e.preventDefault(); // 1. NÃO VÁ PARA A PÁGINA DE DETALHES
-              e.stopPropagation(); // 2. PARE O CLIQUE AQUI
-              toggleFavorite(slug); // 3. LIGUE/DESLIGUE O FAVORITO
+              e.preventDefault(); // 1. Não vá para a página de detalhes
+              e.stopPropagation(); // 2. Pare o clique aqui 
+              toggleFavorite(slug); // 3. Ligue/desligue o favorito
             }}
             className={`absolute top-2 left-2 p-2 rounded-full shadow-sm transition-colors z-10 ${
               favorite

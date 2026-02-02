@@ -1,19 +1,23 @@
+// Importação so link e imagem do next e ícones
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 
+// Define os variáveis, e os seus tipos, de um objeto
 interface CategoryCardProps {
   title: string;
   image: string;
   href: string;
 }
 
+// Define oque tem de ser passado para a função e para quem
 export default function NavigationCard({
   title,
   image,
   href,
 }: CategoryCardProps) {
   return (
+    // Container principal. Envolve tudo em um link
     <Link
       href={href}
       // 'group': Permite controlar a animação da imagem e do texto ao passar o mouse no card inteiro

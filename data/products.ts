@@ -1,3 +1,4 @@
+// Define os parâmetros e tipos do objeto
 export interface Product {
   id: number;
   slug: string; // O ID do link (ex: "croissant-amendoas")
@@ -15,15 +16,16 @@ export interface Product {
   highlights: string[]; // Informações importantes (ex: "Vegano", "Sem Açúcar")
 }
 
+// Array de produtos
 export const products: Product[] = [
-  // === COMIDAS ===
+  // COMIDAS 
   {
     id: 1,
     slug: "croissant-amendoas",
     name: "Croissant de Amêndoas",
     category: "comida",
     price: "22,00",
-    image: "/almond_croissant.jpg", // Certifique-se que o nome do arquivo bate com o da pasta public
+    image: "/almond_croissant.jpg", 
     shortDescription:
       "Massa folhada legítima, recheada com creme e coberta com amêndoas tostadas.",
     fullDescription:
@@ -125,7 +127,7 @@ export const products: Product[] = [
     highlights: ["Sobremesa", "Frutado", "Vegetariano"],
   },
 
-  // === BEBIDAS ===
+  // BEBIDAS 
   {
     id: 101,
     slug: "cappuccino-italiano",
@@ -232,7 +234,7 @@ export const products: Product[] = [
   },
 ];
 
-// Você passa o slug (ex: "matcha-latte") e ela te devolve o produto completo.
+// Você passa o slug (ex: "matcha-latte") e retorna o produto completo
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((product) => product.slug === slug);
 }

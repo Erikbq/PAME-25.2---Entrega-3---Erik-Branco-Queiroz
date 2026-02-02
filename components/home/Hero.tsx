@@ -1,6 +1,8 @@
 export default function Hero() {
   return (
+    // Container principal
     <section className="relative w-full grid grid-cols-1 rounded-2xl overflow-hidden shadow-lg bg-white h-72">
+      {/*Imagem ajustada para o mobile*/}
       <div className="block lg:hidden h-full w-full bg-brand-cream">
         <img
           src="/fachada_esticada.png"
@@ -9,6 +11,7 @@ export default function Hero() {
         />
       </div>
 
+      {/*Imagem ajustada para dispositivos maiores*/}
       <div className="hidden lg:block h-full w-full bg-brand-cream overflow-hidden">
         <img
           src="/fachada_esticada.png"
@@ -16,7 +19,7 @@ export default function Hero() {
           className="w-full h-full object-cover"
           style={{
             // Aumenta a imagem
-            //transform: "scale(1.0)",
+            // transform: "scale(1.0)",
             // Fixa o foco no chão
             transformOrigin: "bottom center",
           }}

@@ -1,3 +1,4 @@
+// Importa os ícones utilizados
 import { FaInstagram, FaFacebook, FaYoutube} from "react-icons/fa";
 export default function Footer() {
   return (

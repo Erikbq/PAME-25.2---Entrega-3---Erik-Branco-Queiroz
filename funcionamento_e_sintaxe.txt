@@ -1,0 +1,302 @@
+-----------------------------------------------------------------------------
+Detalhação técnica
+-----------------------------------------------------------------------------
+
+Home page:
+
+    -----------------------------------------------------------------------------
+    app/page.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # É a Página Inicial (Rota "/").
+            # Atua como um container vertical (flex-col) que organiza as seções principais.
+            # Estrutura visual:
+                1. Banner (Hero).
+                2. Texto informativo de Horários (estático).
+                3. Acordeão "Sobre" (DescriptionAccordion).
+                4. Grid de Destaques e Navegação (Cards).
+            # Responsabilidade: Não possui estado próprio, apenas monta o layout e passa
+            os dados (props) para os componentes filhos (DayItemCard e NavigationCards).
+
+        2- Formatações do TailWind utilizadas:
+            # h-full w-full -> Garante que a página ocupe todo o espaço disponível do layout pai.
+            # flex flex-col -> Cria uma pilha vertical de elementos (um embaixo do outro).
+            # gap-3 -> Espaçamento vertical consistente entre as seções principais.
+            # items-baseline -> Alinha os textos de horário pela base da linha tipográfica.
+            # pl-2 -> Padding Left pequeno para alinhar o texto com a margem visual.
+            # text-brand-brown -> Aplica a cor marrom da marca (definida no tailwind.config).
+            # grid -> Cria o container de grade para os cards finais.
+            # grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -> Responsividade da Grade:
+                - Mobile: 1 coluna (cards empilhados).
+                - Tablet (sm): 2 colunas.
+                - Desktop (lg): 3 colunas lado a lado.
+            # pb-3 -> Padding Bottom para o conteúdo não colar no rodapé.
+
+    -----------------------------------------------------------------------------
+    components/home/Hero.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # É um componente visual estático (Banner Principal).
+            # Utiliza duas divs de imagem diferentes para responsividade:
+                - Uma aparece apenas em telas pequenas (mobile/tablet).
+                - Outra aparece apenas em telas grandes (desktop/lg).
+            # Possui um overlay escuro (div absolute) para garantir leitura do texto.
+            # Possui texto centralizado sobrepondo as imagens.
+
+        2- Formatações do TailWind utilizadas:
+            # relative -> Define o contexto para os elementos filhos absolutos.
+            # rounded-2xl -> Arredondamento de borda grande (1rem).
+            # shadow-lg -> Sombra larga projetada.
+            # hidden lg:block -> Esconde o elemento por padrão, mostra em telas grandes.
+            # block lg:hidden -> Mostra por padrão, esconde em telas grandes.
+            # object-cover -> A imagem cobre todo o container sem distorcer (corta excessos).
+            # absolute inset-0 -> Fixa o elemento nos 4 cantos do pai (top, bottom, left, right = 0).
+            # z-10 -> Garante que o texto fique na frente da imagem e do overlay.
+            # pointer-events-none -> O overlay visual não bloqueia cliques (o clique passa através dele).
+
+    -----------------------------------------------------------------------------
+    components/home/NavigationCards.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Componente reutilizável para links de navegação (ex: "Bebidas", "Comidas").
+            # Recebe "props" (title, image, href) definidas na Interface CategoryCardProps.
+            # Utiliza o componente <Link> do Next.js para navegação interna sem recarregar a página.
+            # Utiliza o conceito de "group" para animar filhos quando o pai recebe hover.
+
+        2- Formatações do TailWind utilizadas:
+            # group -> Classe pai que permite controlar o estado hover dos filhos (group-hover).
+            # absolute inset-0 -> A imagem de fundo ocupa 100% do card.
+            # group-hover:scale-110 -> Aumenta a imagem (zoom) quando o mouse passa no card.
+            # transition-transform duration-700 -> Suaviza a animação do zoom por 700ms.
+            # backdrop-blur-sm -> Aplica um desfoque no fundo da barra de texto inferior.
+            # justify-between -> Separa o texto e a seta nos extremos (esquerda e direita).
+            # group-hover:translate-x-1 -> Move a seta levemente para a direita no hover.
+
+    -----------------------------------------------------------------------------
+    components/home/DescriptionAccordion.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # É um "Client Component" ("use client") pois usa estado (useState).
+            # Controla a visibilidade do texto através da variável boolean [isOpen, setIsOpen].
+            # Utiliza um truque de CSS Grid (grid-rows) para animar a altura de 0 a auto suavemente.
+        
+        2- Formatações do TailWind utilizadas:
+            # "use client" -> Diretiva do Next.js para renderizar no navegador.
+            # cursor-pointer (implícito no button) -> Indica clicável.
+            # rotate-180 -> Gira o ícone da seta quando o acordeão está aberto.
+            # grid -> Transforma o container do texto oculto em grid.
+            # grid-rows-[0fr] -> Estado fechado: altura da linha é 0 (conteúdo escondido).
+            # grid-rows-[1fr] -> Estado aberto: altura da linha é 1 fração (conteúdo visível).
+            # overflow-hidden -> Essencial para esconder o texto quando a grid é 0fr.
+            # transition-[grid-template-rows] -> Anima especificamente a mudança de tamanho da grid.
+
+    -----------------------------------------------------------------------------
+    components/home/DayItemCard.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Card especializado para destacar um item (layout horizontal).
+            # Divide o espaço em: Imagem (45% da largura) e Conteúdo (Flex-1 / Restante).
+            # Recebe props (title, description, image, href).
+            # O botão "Ver detalhes" contém um Link interno.
+
+        2- Formatações do TailWind utilizadas:
+            # w-[45%] -> Largura arbitrária específica (JIT mode).
+            # mix-blend-multiply -> Modo de mesclagem do CSS (escurece a imagem com a cor do fundo).
+            # flex-1 -> Ocupa todo o espaço restante disponível no flex container.
+            # uppercase tracking-widest -> Texto em caixa alta com espaçamento entre letras aumentado.
+            # leading-tight -> Altura da linha (line-height) apertada para títulos.
+            # mt-auto -> (Ou lógica de flex) Empurra o elemento para o final do container vertical.
+            # hover:shadow-xl -> Aumenta a sombra ao passar o mouse.
+
+Páginas de menu, favoritos e detalhes:
+
+    -----------------------------------------------------------------------------
+    app/comidas/page.tsx  (E também app/bebidas/page.tsx)
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # É uma "Server Page" (Renderizada no servidor).
+            # Passo 1: Importa o banco de dados completo de 'data/products.ts'.
+            # Passo 2: Filtra os dados:
+                - const lista = products.filter(item => item.category === "comida")
+            # Passo 3: Percorre a lista filtrada (.map) e cria um <ProductCard /> para cada item.
+            # Vantagem: Se você adicionar um prato novo no arquivo de dados, esta página
+            atualiza sozinha sem precisar mexer no código dela.
+
+        2- Formatações do TailWind utilizadas:
+            # max-w-6xl mx-auto -> Centraliza o conteúdo e limita a largura em telas gigantes.
+            # grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -> O Grid Responsivo:
+                - 1 coluna no celular.
+                - 2 colunas no tablet (sm).
+                - 3 colunas no desktop (lg).
+            # gap-8 -> Espaçamento generoso entre os cards (respiro visual).
+            # py-10 -> Padding vertical para o conteúdo não colar nas bordas superior/inferior.
+
+    -----------------------------------------------------------------------------
+    components/ui/Button.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Componente de botão reutilizável e flexível.
+            # Herança de Props: Usa `extends ButtonHTMLAttributes` para aceitar todas as propriedades
+            padrão de um botão HTML (onClick, disabled, type, etc.) sem precisar declarar uma a uma.
+            # Variantes: Aceita uma prop 'variant' ("primary", "secondary", "outline") que define a cor.
+            # Desestruturação (...props): Pega todas as propriedades extras passadas e joga direto
+            na tag <button> real.
+
+        2- Formatações do TailWind utilizadas:
+            # rounded-full -> Botão com bordas totalmente arredondadas (pílula).
+            # active:scale-95 -> Efeito visual de "pressionar": diminui levemente o botão ao clicar.
+            # transition-all duration-300 -> Suaviza todas as mudanças de cor e tamanho.
+            # border-2 -> Espessura da borda (usado na variante 'outline').
+            # shadow-md hover:shadow-lg -> Aumenta a sombra quando passa o mouse (efeito de elevação).
+
+    -----------------------------------------------------------------------------
+    context/FavoritesContext.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Gerenciamento de Estado Global (Context API).
+            # useState<string[]> -> Cria a "memória" que guarda uma lista de textos (os slugs).
+            # createContext -> Cria o canal de comunicação.
+            # Provider -> O componente que "abraça" o app e distribui os dados.
+            # toggleFavorite -> Lógica inteligente: verifica se o item já existe.
+            Se existe, remove (filter). Se não existe, adiciona (spread operator ...prev).
+            # useFavorites (Custom Hook) -> Facilita o uso do contexto nas páginas, adicionando
+            uma verificação de segurança (lança erro se usado fora do Provider).
+
+        2- Formatações do TailWind utilizadas:
+            # Nenhuma (Este arquivo é puramente lógico/JavaScript).
+
+    -----------------------------------------------------------------------------
+    components/ui/FavoriteButton.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # "Ilha de Interatividade" ("use client").
+            # Isolamento: Componente pequeno criado para permitir interatividade dentro de
+            páginas estáticas (Server Components) sem converter a página inteira.
+            # Conexão: Usa o hook `useFavorites` para ler e alterar o estado global.
+            # Feedback Visual: Alterna entre ícone preenchido (FaStar) e contorno (FaRegStar)
+            baseado no estado boolean `favorite`.
+
+        2- Formatações do TailWind utilizadas:
+            # p-3 -> Padding interno confortável para aumentar a área de clique.
+            # rounded-full -> Círculo perfeito.
+            # border -> Adiciona borda fina.
+            # bg-yellow-100 text-yellow-500 -> Cores aplicadas condicionalmente (se favorito = true).
+            # hover:bg-brand-light -> Feedback visual ao passar o mouse (se favorito = false).
+
+    -----------------------------------------------------------------------------
+    components/menu/ProductCard.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Card clicável (Link) que contém um botão interno (Favorito).
+            # Prevenção de Eventos:
+                - e.preventDefault(): Impede que o Link abra a página de detalhes ao clicar na estrela.
+                - e.stopPropagation(): Impede que o clique "suba" para os elementos pais.
+            # Integração: Lê o contexto para saber se deve pintar a estrela de amarelo assim que carrega.
+
+        2- Formatações do TailWind utilizadas:
+            # group -> Permite animações coordenadas (hover no card dá zoom na imagem).
+            # line-clamp-2 -> Corta o texto da descrição após 2 linhas e adiciona "...".
+            # backdrop-blur-sm -> Efeito de vidro fosco no preço sobre a imagem.
+            # active:scale-95 -> Animação de clique no botão de "Adicionar".
+            # z-10 -> Garante que o botão de favorito fique SOBRE a imagem e o link (camada superior).
+
+    -----------------------------------------------------------------------------
+    app/favoritos/page.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Client Component ("use client") pois precisa ler o Contexto em tempo real.
+            # Filtragem de Dados:
+                - Importa TODOS os produtos.
+                - Filtra comparando com a lista de favoritos:
+                products.filter(item => favorites.includes(item.slug))
+            # Renderização Condicional (Ternário): Muda a mensagem de texto dependendo se
+            a lista está vazia (length > 0) ou cheia.
+            # Reutilização: Usa o mesmo <ProductCard /> das outras páginas.
+
+        2- Formatações do TailWind utilizadas:
+            # w-full max-w-6xl mx-auto -> Padrão de container centralizado do site.
+            # grid grid-cols-1 ... -> Mesmo layout responsivo das páginas de menu.
+            # text-center -> Centraliza os títulos e textos descritivos.
+            # space-y-2 -> Adiciona espaçamento vertical entre os parágrafos de texto.
+
+    -----------------------------------------------------------------------------
+    data/products.ts
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # "Banco de Dados" Estático (Mock Data).
+            # TypeScript Interface: Define o contrato (regras) que todo produto deve seguir
+            (obrigatório ter id, slug, price, nutritionalInfo, etc.).
+            # Exportação: Exporta a lista (array) e uma função helper (getProductBySlug).
+            # Helper Function (.find): Método de array que busca o primeiro item que satisfaz
+            a condição (slug igual ao procurado).
+
+        2- Formatações do TailWind utilizadas:
+            # Nenhuma (Este arquivo contém apenas dados brutos e lógica TypeScript).
+
+    -----------------------------------------------------------------------------
+    components/menu/ProductCard.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Representa a unidade visual de um item do cardápio.
+            # Envolve todo o conteúdo em um componente <Link> para tornar o card clicável.
+            # Recebe props dinâmicas: title, description, price, image, slug.
+            # Interatividade:
+                - Botão de Favorito: Usa e.preventDefault() para não ativar o link principal.
+                - Efeito Hover: Dá zoom na imagem e levanta o card (sombra).
+
+        2- Formatações do TailWind utilizadas:
+            # group -> Permite que o hover no card afete a imagem interna (group-hover:scale-105).
+            # line-clamp-2 -> Corta o texto da descrição se passar de 2 linhas (adiciona ...).
+            # object-cover -> Garante que a foto preencha o quadrado sem distorcer.
+            # flex flex-col h-full -> Força o card a ter altura igual aos vizinhos e joga
+            o botão de "Adicionar" sempre para o final (mt-auto).
+
+Elementos fixos:
+
+    -----------------------------------------------------------------------------
+    components/layout/Sidebar.tsx  (Menu de Navegação)
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # É um "Client Component" que recebe ordens do pai (Layout).
+            # Responsabilidade: Exibir links de navegação e redes sociais.
+            # Comportamento Mobile:
+                - Fica oculto por padrão (translate-x-full).
+                - Desliza para a tela quando recebe a prop 'isOpen={true}'.
+                - Possui um botão "X" e um overlay (fundo escuro) para fechar.
+            # Comportamento Desktop:
+                - Fica sempre visível (relative) e empurra o conteúdo principal para o lado.
+            # Interação: Ao clicar em qualquer link, executa a função 'onClose' para
+            fechar o menu automaticamente (UX essencial para mobile).
+
+        2- Formatações do TailWind utilizadas:
+            # fixed md:relative -> No celular é fixo (flutua), no PC é relativo (ocupa espaço).
+            # z-50 -> Garante que o menu fique na frente de absolutamente tudo.
+            # h-screen -> Ocupa 100% da altura da tela.
+            # -translate-x-full -> Esconde o menu movendo-o 100% para a esquerda.
+            # translate-x-0 -> Traz o menu para a posição original (visível).
+            # transition-transform duration-300 -> Anima a entrada/saída suavemente.
+            # border-r -> Cria a linha fina de separação na direita.
+
+    -----------------------------------------------------------------------------
+    components/layout/Footer.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Componente estático de exibição (sem estado "useState").
+            # Importado no 'app/layout.tsx', garantindo que apareça em TODAS as páginas.
+            # Responsabilidade: Fechar a experiência do usuário com informações institucionais,
+            direitos autorais (Copyright) e links para redes sociais.
+            # Estrutura Visual: Geralmente utiliza um fundo escuro para contrastar com
+            o restante do site (creme/branco), criando uma "base" visual.
+
+        2- Formatações do TailWind utilizadas:
+            # w-full -> Ocupa toda a largura da tela.
+            # bg-brand-brown -> Cor de fundo escura (marrom da marca).
+            # text-brand-cream -> Texto claro para contraste (acessibilidade).
+            # flex flex-col md:flex-row -> O padrão de responsividade:
+                - Mobile: Itens empilhados verticalmente (coluna).
+                - Desktop (md): Itens lado a lado (linha).
+            # justify-between -> No desktop, joga o conteúdo para os extremos (esquerda/direita).
+            # items-center -> Centraliza os elementos verticalmente.
+            # py-6 -> Padding vertical (espaçamento interno em cima e embaixo).
+            # mt-auto -> (Truque CSS) Se aplicado, empurra o footer para o final da página
+            mesmo se houver pouco conteúdo no meio.
