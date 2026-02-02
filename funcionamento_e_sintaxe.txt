@@ -114,22 +114,26 @@ Páginas de menu, favoritos e detalhes:
     app/comidas/page.tsx  (E também app/bebidas/page.tsx)
     -----------------------------------------------------------------------------
         1- Lógica do Componente:
-            # É uma "Server Page" (Renderizada no servidor).
-            # Passo 1: Importa o banco de dados completo de 'data/products.ts'.
-            # Passo 2: Filtra os dados:
-                - const lista = products.filter(item => item.category === "comida")
-            # Passo 3: Percorre a lista filtrada (.map) e cria um <ProductCard /> para cada item.
-            # Vantagem: Se você adicionar um prato novo no arquivo de dados, esta página
-            atualiza sozinha sem precisar mexer no código dela.
+            # ATENÇÃO: Mudou de "Server Component" para "Client Component" ("use client").
+            # Motivo: Precisa gerenciar estado instantâneo (filtros e ordenação).
+            # Gerenciamento de Estado (useState):
+                - sortOrder: Guarda a ordem atual ("asc", "desc" ou "default").
+                - selectedTag: Guarda qual etiqueta está ativa (ex: "Vegano") ou null.
+            # Processamento de Dados (Pipeline):
+                1. Filtra Categoria: Pega apenas "comida" do banco de dados.
+                2. Extrai Tags: Usa .flatMap() e new Set() para descobrir quais tags existem
+                automaticamente baseada nos produtos cadastrados.
+                3. Filtra Tags: Se houver tag selecionada, remove itens que não a possuem.
+                4. Ordena Preço: Converte string "22,00" para número 22.00 (parseFloat) e
+                reorganiza a lista matematicamente.
+            # Renderização Condicional: Se o filtro não encontrar nada, exibe mensagem de
+            "Nenhum item encontrado" com botão de limpar.
 
         2- Formatações do TailWind utilizadas:
-            # max-w-6xl mx-auto -> Centraliza o conteúdo e limita a largura em telas gigantes.
-            # grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -> O Grid Responsivo:
-                - 1 coluna no celular.
-                - 2 colunas no tablet (sm).
-                - 3 colunas no desktop (lg).
-            # gap-8 -> Espaçamento generoso entre os cards (respiro visual).
-            # py-10 -> Padding vertical para o conteúdo não colar nas bordas superior/inferior.
+            # flex flex-col gap-8 -> Espaçamento vertical entre cabeçalho, filtros e grid.
+            # col-span-full -> Faz a mensagem de erro ocupar todas as 3 colunas do grid.
+            # opacity-50 -> Deixa o texto de "não encontrado" cinza claro (visual suave).
+            # hover:underline -> Sublinha o botão "Limpar filtros" ao passar o mouse.
 
     -----------------------------------------------------------------------------
     components/ui/Button.tsx
@@ -250,6 +254,26 @@ Páginas de menu, favoritos e detalhes:
             # object-cover -> Garante que a foto preencha o quadrado sem distorcer.
             # flex flex-col h-full -> Força o card a ter altura igual aos vizinhos e joga
             o botão de "Adicionar" sempre para o final (mt-auto).
+        
+    -----------------------------------------------------------------------------
+    components/menu/FilterBar.tsx
+    -----------------------------------------------------------------------------
+        1- Lógica do Componente:
+            # Componente de Interface ("Client Component").
+            # Responsabilidade: Receber os comandos do usuário (cliques) e avisar a página pai
+            para atualizar a lista. Não filtra os dados sozinho, apenas gerencia os botões.
+            # Ordenação Cíclica: O botão de preço alterna entre 3 estados ao clicar:
+            Default (Normal) -> Asc (Menor Preço) -> Desc (Maior Preço).
+            # Scroll Horizontal: A lista de tags (Filtros Rápidos) permite rolagem lateral
+            em telas pequenas para não quebrar o layout.
+
+        2- Formatações do TailWind utilizadas:
+            # flex-wrap -> Permite que os botões caiam para a linha de baixo se faltar espaço.
+            # overflow-x-auto -> Habilita rolagem horizontal na lista de tags.
+            # whitespace-nowrap -> Impede que o texto dos botões quebre (fique em duas linhas).
+            # no-scrollbar -> (Classe utilitária costumizada) Esconde a barra de rolagem feia
+            mas mantém a funcionalidade de scroll.
+            # hidden sm:block -> Esconde o divisor visual em celulares e mostra em tablets.
 
 Elementos fixos:
 
